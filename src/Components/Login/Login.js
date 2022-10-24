@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { AuthContext } from '../../Context/UserContext';
 
 const Login = () => {
+    const { googleLogIn } = useContext(AuthContext)
+    const google = () => {
+        googleLogIn();
+    }
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col ">
@@ -28,7 +33,7 @@ const Login = () => {
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Login</button>
                         </div>
-                        <button className="btn btn-outline btn-primary"> <FaGoogle className='mr-3' /> Google LogIn</button>
+                        <button onClick={google} className="btn btn-outline btn-primary"> <FaGoogle className='mr-3' /> Google LogIn</button>
                         <button className="btn btn-outline btn-primary"> <FaGithub className='mr-3' /> GitHub LogIn</button>
                     </div>
                 </div>
