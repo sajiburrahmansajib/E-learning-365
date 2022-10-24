@@ -4,6 +4,8 @@ import Blog from './Components/Blog/Blog';
 import Courses from './Components/Courses/Courses';
 import Error from './Components/Error/Error';
 import Home from './Components/Home/Home';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 import Main from './Layout/Main';
 
 function App() {
@@ -23,6 +25,14 @@ function App() {
         {
           path: '/courses',
           element: <Courses></Courses>
+        },
+        {
+          path: '/login',
+          element: <Login></Login>
+        },
+        {
+          path: '/register',
+          element: <Register></Register>
         },
         {
           path: '*',

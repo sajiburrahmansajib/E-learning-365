@@ -12,9 +12,16 @@ const Header = () => {
                 <Link to='/blogs' className="btn btn-ghost normal-case text-xl  text-white">Blog</Link>
             </div>
             <div className="flex-none gap-2">
+                <div className="form-control">
+                    <Link to='/login' className="btn btn-ghost normal-case text-xl  text-white">Log In</Link>
+                </div>
+                <div className="form-control">
+                    <Link to='/register' className="btn btn-ghost normal-case text-xl  text-white">Sign Up</Link>
+                </div>
 
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+
                         <div className="w-10 rounded-full">
                             <img src="https://placeimg.com/80/80/people" />
                         </div>
