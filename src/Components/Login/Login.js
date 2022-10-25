@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 
 const Login = () => {
-    const { googleLogIn, emailPasswordLogIn, githubLogIn } = useContext(AuthContext)
+    const { googleLogIn, emailPasswordLogIn, githubLogIn, setLoading } = useContext(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
@@ -30,6 +30,9 @@ const Login = () => {
             })
             .catch(error => {
                 console.log('error', error)
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }
 
