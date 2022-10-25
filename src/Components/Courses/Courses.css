@@ -1,6 +1,7 @@
 .course-container {
     display: grid;
     grid-template-columns: 4fr 8fr;
+    padding: 0px 20px;
 }
 
 .course-name {
@@ -11,6 +12,7 @@
     font-weight: 600;
     padding: 30px;
     margin-top: 10px;
+    border-radius: 10px;
 }
 
 .course-name a:hover {

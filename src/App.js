@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Blog from './Components/Blog/Blog';
+import CourseDetails from './Components/CourseDetails/CourseDetails';
 import Courses from './Components/Courses/Courses';
 import Error from './Components/Error/Error';
 import Home from './Components/Home/Home';
@@ -37,6 +38,11 @@ function App() {
           element: <Register></Register>
         },
         {
+          path: '/courses/:id',
+          element: <CourseDetails></CourseDetails>,
+          loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`)
+        },
+        {
           path: '*',
           element: <Error></Error>
         }
@@ -44,7 +50,7 @@ function App() {
     }
   ])
   return (
-    <div className="App">
+    <div >
       <RouterProvider router={route}></RouterProvider>
     </div>
   );
