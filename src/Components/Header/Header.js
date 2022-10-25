@@ -15,7 +15,7 @@ const Header = () => {
     return (
         <div className="navbar bg-blue-800">
             <div className="flex-1">
-                <NavLink to='/'> <img className='h-20' src={logo} alt="main logo" /></NavLink>
+                <NavLink to='/home'> <img className='h-20' src={logo} alt="main logo" /></NavLink>
                 <NavLink style={({ isActive }) =>
                     isActive ? activeStyle : undefined
                 } to='/home' className="btn btn-ghost normal-case text-xl text-white ">Home</NavLink>

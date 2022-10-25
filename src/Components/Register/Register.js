@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/UserContext';
 
 const Register = () => {
+    const { createUser, userProfile } = useContext(AuthContext);
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target
@@ -10,7 +12,17 @@ const Register = () => {
         const email = form.email.value
         const password = form.password.value
         console.log(name, photo, email, password)
+        createUser(email, password)
+            .then(result => {
+                const user = result.user
+                userProfile(name, photo)
+                console.log(user)
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
     }
+
     return (
         <form onSubmit={handleSubmit} className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col ">
@@ -29,19 +41,19 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Photo Url</span>
                             </label>
-                            <input type="text" placeholder="photoUrl" name='photoUrl' className="input input-bordered" />
+                            <input type="text" placeholder="photoUrl" name='photoUrl' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" placeholder="email" name='email' className="input input-bordered" />
+                            <input type="text" placeholder="email" name='email' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" placeholder="password" name='password' className="input input-bordered" />
+                            <input type="password" placeholder="password" name='password' className="input input-bordered" required />
                             <label className="label">
                                 <span>Already have an account ? <Link to='/login' className='underline text-info'>Login</Link></span>
                             </label>

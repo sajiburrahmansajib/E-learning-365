@@ -1,11 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import app from '../Firebase/firebase.config';
 
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider()
+const githubProvider = new GithubAuthProvider()
 
 const UserContext = ({ children }) => {
 
@@ -22,6 +23,36 @@ const UserContext = ({ children }) => {
                 console.log('error', error)
             })
     };
+    const githubLogIn = () => {
+        signInWithPopup(auth, githubProvider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    };
+
+
+    const createUser = (email, password) => {
+        return createUserWithEmailAndPassword(auth, email, password);
+    };
+    const userProfile = (name, url) => {
+        updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL: url
+        })
+            .then(() => {
+                console.log('User Profile Update')
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    };
+    const emailPasswordLogIn = (email, password) => {
+        return signInWithEmailAndPassword(auth, email, password)
+    }
     const logOut = () => {
         signOut(auth)
             .then(() => {
@@ -39,7 +70,15 @@ const UserContext = ({ children }) => {
         return () => unsubscribe();
     }, [])
 
-    const authInfo = { user, googleLogIn, logOut }
+    const authInfo = {
+        user,
+        googleLogIn,
+        logOut,
+        createUser,
+        userProfile,
+        emailPasswordLogIn,
+        githubLogIn
+    }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}

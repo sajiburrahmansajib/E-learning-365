@@ -3,12 +3,30 @@ import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../Context/UserContext';
 
 const Login = () => {
-    const { googleLogIn } = useContext(AuthContext)
+    const { googleLogIn, emailPasswordLogIn, githubLogIn } = useContext(AuthContext)
     const google = () => {
         googleLogIn();
     }
+    const github = () => {
+        githubLogIn();
+    }
+    const handleSubmitWithEmailPassword = (event) => {
+        event.preventDefault();
+        const form = event.target
+        const email = form.email.value
+        const password = form.password.value
+        emailPasswordLogIn(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user)
+            })
+            .catch(error => {
+                console.log('error', error)
+            })
+    }
+
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <form onSubmit={handleSubmitWithEmailPassword} className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col ">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Login Now !</h1>
@@ -19,13 +37,13 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" placeholder="email" className="input input-bordered" />
+                            <input type="text" name='email' placeholder="email" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" placeholder="password" className="input input-bordered" />
+                            <input type="text" name='password' placeholder="password" className="input input-bordered" />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
@@ -34,11 +52,11 @@ const Login = () => {
                             <button className="btn btn-primary">Login</button>
                         </div>
                         <button onClick={google} className="btn btn-outline btn-primary"> <FaGoogle className='mr-3' /> Google LogIn</button>
-                        <button className="btn btn-outline btn-primary"> <FaGithub className='mr-3' /> GitHub LogIn</button>
+                        <button onClick={github} className="btn btn-outline btn-primary"> <FaGithub className='mr-3' /> GitHub LogIn</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     );
 };
 
