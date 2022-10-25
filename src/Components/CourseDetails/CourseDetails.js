@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaTag } from 'react-icons/fa';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import './CourseDetails.css'
 
 const CourseDetails = () => {
@@ -18,7 +18,7 @@ const CourseDetails = () => {
                     <p>Total Video : {selectedCourse.videoDuration} hour</p>
                 </div>
                 <div className="card-actions justify-center">
-                    <button className="btn btn-success font-bold">Enroll Now</button>
+                    <Link to={selectedCourse.id}><button className="btn btn-success font-bold">Enroll Now</button> </Link>
                 </div>
             </div>
         </div>

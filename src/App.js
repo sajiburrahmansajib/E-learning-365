@@ -8,6 +8,8 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Main from './Layout/Main';
+import Enroll from './Routes/Pages/Enroll/Enroll';
+import PrivateRoute from './Routes/PrivateRoute/PrivateRoute';
 
 function App() {
   const route = createBrowserRouter([
@@ -36,6 +38,11 @@ function App() {
         {
           path: '/register',
           element: <Register></Register>
+        },
+        {
+          path: '/courses/:id/:id',
+          element: <PrivateRoute> <Enroll></Enroll> </PrivateRoute>,
+          loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}/${params.id}`)
         },
         {
           path: '/courses/:id',

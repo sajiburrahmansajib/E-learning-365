@@ -1,14 +1,20 @@
 import React, { useContext } from 'react';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 
 const Login = () => {
     const { googleLogIn, emailPasswordLogIn, githubLogIn } = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
     const google = () => {
         googleLogIn();
+        navigate(from, { replace: true });
     }
     const github = () => {
         githubLogIn();
+        navigate(from, { replace: true });
     }
     const handleSubmitWithEmailPassword = (event) => {
         event.preventDefault();
@@ -19,6 +25,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user)
+                form.reset();
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.log('error', error)
@@ -43,9 +51,9 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" name='password' placeholder="password" className="input input-bordered" />
+                            <input type="password" name='password' placeholder="password" className="input input-bordered" />
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <Link className="label-text-alt link link-hover">Forgot password?</Link>
                             </label>
                         </div>
                         <div className="form-control mt-6">

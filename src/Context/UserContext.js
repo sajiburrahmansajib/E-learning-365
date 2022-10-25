@@ -14,6 +14,7 @@ const UserContext = ({ children }) => {
     const [loading, setLoading] = useState(true)
 
     const googleLogIn = () => {
+        setLoading(true)
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 const user = result.user;
@@ -24,6 +25,7 @@ const UserContext = ({ children }) => {
             })
     };
     const githubLogIn = () => {
+        setLoading(true)
         signInWithPopup(auth, githubProvider)
             .then(result => {
                 const user = result.user;
@@ -36,9 +38,11 @@ const UserContext = ({ children }) => {
 
 
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
     };
     const userProfile = (name, url) => {
+        setLoading(true)
         updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: url
@@ -51,12 +55,14 @@ const UserContext = ({ children }) => {
             })
     };
     const emailPasswordLogIn = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
     const logOut = () => {
+        setLoading(true)
         signOut(auth)
             .then(() => {
-                alert('Successfully Log Out')
+                console.log("log out")
             })
             .catch(error => {
                 console.log('error', error)
@@ -77,7 +83,8 @@ const UserContext = ({ children }) => {
         createUser,
         userProfile,
         emailPasswordLogIn,
-        githubLogIn
+        githubLogIn,
+        loading
     }
     return (
         <AuthContext.Provider value={authInfo}>
