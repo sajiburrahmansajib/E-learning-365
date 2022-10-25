@@ -16,7 +16,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <h1>all course : {allCourse.length}</h1>
+
         </div>
     );
 };

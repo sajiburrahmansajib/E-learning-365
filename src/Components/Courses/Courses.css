@@ -1,0 +1,30 @@
+.course-container {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+}
+
+.course-name {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    font-size: x-large;
+    font-weight: 600;
+    padding: 30px;
+    margin-top: 10px;
+}
+
+.course-name a:hover {
+    color: crimson;
+    font-weight: 900;
+    font-size: xx-large;
+}
+
+
+.course-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: auto;
+    margin-top: 10px;
+
+}
