@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Blog from './Components/Blog/Blog';
@@ -18,7 +19,7 @@ function App() {
       element: <Main></Main>,
       children: [
         {
-          path: '/home',
+          path: '/',
           loader: () => fetch('http://localhost:5000/courses'),
           element: <Home></Home>
         },
@@ -59,6 +60,7 @@ function App() {
   return (
     <div >
       <RouterProvider router={route}></RouterProvider>
+      <Toaster></Toaster>
     </div>
   );
 }

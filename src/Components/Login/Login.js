@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
@@ -9,12 +10,33 @@ const Login = () => {
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
     const google = () => {
-        googleLogIn();
-        navigate(from, { replace: true });
+        googleLogIn()
+            .then(result => {
+                const user = result.user;
+                setLoading(true)
+                console.log(user)
+                toast.success('Successfully Login!');
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.log('error', error)
+                toast.error(`Error ${error}`);
+            })
+
     }
     const github = () => {
-        githubLogIn();
-        navigate(from, { replace: true });
+        githubLogIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                toast.success('Successfully Login!');
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                console.log('error', error)
+                toast.error(`Error ${error}`);
+            })
+
     }
     const handleSubmitWithEmailPassword = (event) => {
         event.preventDefault();
@@ -26,10 +48,17 @@ const Login = () => {
                 const user = result.user
                 console.log(user)
                 form.reset();
-                navigate(from, { replace: true });
+                if (user.emailVerified) {
+                    toast.success('Successfully login');
+                    navigate(from, { replace: true });
+                }
+                else {
+                    toast.error('Verify your Email address to login.')
+                }
             })
             .catch(error => {
                 console.log('error', error)
+                toast.error(`Error ${error}`);
             })
             .finally(() => {
                 setLoading(false);
@@ -48,13 +77,13 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" name='email' placeholder="email" className="input input-bordered" />
+                            <input type="text" name='email' placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name='password' placeholder="password" className="input input-bordered" />
+                            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                             <label className="label">
                                 <Link className="label-text-alt link link-hover">Forgot password?</Link>
                             </label>

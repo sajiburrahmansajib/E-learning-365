@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { FaUser } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
@@ -7,18 +8,25 @@ import logo from './main_logo.png'
 const Header = () => {
     const { user, logOut } = useContext(AuthContext);
     const handelLogOut = () => {
-        logOut();
+        logOut()
+            .then(() => {
+                toast.success('Successfully Logout');
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
-    let activeStyle = {
+    const activeStyle = {
         color: "red",
     };
+
     return (
         <div className="navbar bg-blue-800">
             <div className="flex-1">
-                <NavLink to='/home'> <img className='h-20' src={logo} alt="main logo" /></NavLink>
+                <NavLink to='/'> <img className='h-20' src={logo} alt="main logo" /></NavLink>
                 <NavLink style={({ isActive }) =>
                     isActive ? activeStyle : undefined
-                } to='/home' className="btn btn-ghost normal-case text-xl text-white ">Home</NavLink>
+                } to='/' className="btn btn-ghost normal-case text-xl text-white ">Home</NavLink>
                 <NavLink style={({ isActive }) =>
                     isActive ? activeStyle : undefined
                 } to='/courses' className="btn btn-ghost normal-case text-xl  text-white">Courses</NavLink>
@@ -48,7 +56,7 @@ const Header = () => {
                 <div className="dropdown dropdown-end">
 
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar mr-8 tooltip " data-tip={user?.displayName}>
-                        <div className="w-15 rounded-full">
+                        <div className="w-15  rounded-full">
                             {
                                 user?.uid ?
                                     <img src={user.photoURL}></img>
@@ -63,7 +71,12 @@ const Header = () => {
                                 {user?.displayName}
                             </Link>
                         </li>
-                        <li><Link>Mode : Dark / Light</Link></li>
+                        <li><div className="form-control">
+                            <label className="label cursor-pointer ">
+                                <span className="label-text mr-6">Dark Mode</span>
+                                <input type="checkbox" className="toggle" unchecked />
+                            </label>
+                        </div></li>
                         {
                             user?.uid ?
                                 <li><Link onClick={handelLogOut}>Log Out</Link></li>
