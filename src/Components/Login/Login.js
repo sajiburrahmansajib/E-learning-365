@@ -1,12 +1,12 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 
 const Login = () => {
-    const [error, setError] = useState('');
+
     const { signIn, setLoading, googleProviderLogin, githubProviderLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -27,8 +27,8 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                setError('');
                 if (user.emailVerified) {
+                    toast.success('Successfully login , Please refresh the page ')
                     navigate(from, { replace: true });
                 }
                 else {
@@ -37,7 +37,7 @@ const Login = () => {
             })
             .catch(error => {
                 console.error(error)
-                setError(error.message);
+                toast.error(`Error occur ${error}`)
             })
             .finally(() => {
                 setLoading(false);

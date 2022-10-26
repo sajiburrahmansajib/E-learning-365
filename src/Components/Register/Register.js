@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 
 const Register = () => {
-    // const { createUser, updateUserProfile, verifyEmail } = useContext(AuthContext);
-    const [error, setError] = useState('');
-    const [accepted, setAccepted] = useState(false);
+
+
     const { createUser, updateUserProfile, verifyEmail } = useContext(AuthContext);
 
     const handleSubmit = event => {
@@ -22,15 +21,13 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setError('');
                 form.reset();
                 handleUpdateUserProfile(name, photoURL);
                 handleEmailVerification();
                 toast.success('Please verify your email address.')
             })
             .catch(e => {
-                console.error(e);
-                setError(e.message);
+                toast.error(`Error Occur ${e}`)
             });
     }
 
