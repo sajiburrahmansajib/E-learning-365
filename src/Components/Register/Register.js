@@ -59,9 +59,9 @@ const Register = () => {
                     <div className="card-body">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Your Name</span>
+                                <span className="label-text">Your Full Name</span>
                             </label>
-                            <input type="text" placeholder="name" name='name' className="input input-bordered" required />
+                            <input type="text" placeholder="Full name" name='name' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">

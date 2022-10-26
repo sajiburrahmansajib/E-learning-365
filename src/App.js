@@ -20,7 +20,7 @@ function App() {
       children: [
         {
           path: '/',
-          loader: () => fetch('http://localhost:5000/courses'),
+          loader: () => fetch('https://e-learning-365-server.vercel.app/courses'),
           element: <Home></Home>
         },
         {
@@ -29,7 +29,7 @@ function App() {
         },
         {
           path: '/courses',
-          loader: () => fetch('http://localhost:5000/courses'),
+          loader: () => fetch('https://e-learning-365-server.vercel.app/courses'),
           element: <Courses></Courses>
         },
         {
@@ -43,12 +43,12 @@ function App() {
         {
           path: '/courses/:id/:id',
           element: <PrivateRoute> <Enroll></Enroll> </PrivateRoute>,
-          loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}/${params.id}`)
+          loader: ({ params }) => fetch(`https://e-learning-365-server.vercel.app/courses/${params.id}/${params.id}`)
         },
         {
           path: '/courses/:id',
           element: <CourseDetails></CourseDetails>,
-          loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`)
+          loader: ({ params }) => fetch(`https://e-learning-365-server.vercel.app/courses/${params.id}`)
         },
         {
           path: '*',

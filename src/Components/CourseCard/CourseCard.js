@@ -9,7 +9,7 @@ const CourseCard = ({ course }) => {
                 <img src={picture} alt="Shoes" className="rounded-xl" />
             </figure>
             <div className="card-body items-center text-center">
-                <Link to={id}><h2 className="card-title text-orange-400 ">{name}</h2></Link>
+                <Link to={id}><h2 className="card-title text-orange-400 underline underline-offset-8">{name}</h2></Link>
 
             </div>
         </div>
