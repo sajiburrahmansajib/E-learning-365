@@ -1,47 +1,56 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
 
 const Register = () => {
+    // const { createUser, updateUserProfile, verifyEmail } = useContext(AuthContext);
+    const [error, setError] = useState('');
+    const [accepted, setAccepted] = useState(false);
     const { createUser, updateUserProfile, verifyEmail } = useContext(AuthContext);
-    const handleSubmit = (event) => {
+
+    const handleSubmit = event => {
         event.preventDefault();
-        const form = event.target
-        const name = form.name.value
-        const photo = form.photoUrl.value
-        const email = form.email.value
-        const password = form.password.value
-        console.log(name, photo, email, password)
+        const form = event.target;
+        const name = form.name.value;
+        const photoURL = form.photoURL.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log(name, photoURL, email, password);
+
         createUser(email, password)
             .then(result => {
-                const user = result.user
-                console.log(user)
+                const user = result.user;
+                console.log(user);
+                setError('');
                 form.reset();
-                handleUpdateUserProfile(name, photo);
-                handleEmailVerification()
+                handleUpdateUserProfile(name, photoURL);
+                handleEmailVerification();
                 toast.success('Please verify your email address.')
             })
-            .catch(error => {
-                console.log('error', error)
-                toast.error(`Error ${error}`);
-            })
+            .catch(e => {
+                console.error(e);
+                setError(e.message);
+            });
     }
-    const handleUpdateUserProfile = (name, photo) => {
+
+    const handleUpdateUserProfile = (name, photoURL) => {
         const profile = {
             displayName: name,
-            photoURL: photo
+            photoURL: photoURL
         }
 
         updateUserProfile(profile)
             .then(() => { })
             .catch(error => console.error(error));
     }
+
     const handleEmailVerification = () => {
         verifyEmail()
             .then(() => { })
             .catch(error => console.error(error));
     }
+
 
     return (
         <form onSubmit={handleSubmit} className="hero min-h-screen bg-base-200">
@@ -61,7 +70,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Photo Url</span>
                             </label>
-                            <input type="text" placeholder="photoUrl" name='photoUrl' className="input input-bordered" required />
+                            <input type="text" placeholder="photoUrl" name='photoURL' className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -79,7 +88,7 @@ const Register = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary" type='submit'>Login</button>
+                            <button className="btn btn-primary" type='submit'>Register</button>
                         </div>
                     </div>
                 </div>
