@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import './CourseCard.css'
+
 const CourseCard = ({ course }) => {
     const { id, name, picture } = course
     return (
-        <div className="card w-96 bg-slate-500 shadow-xl">
+        <div className="card w-96 bg-slate-500 shadow-xl card-container ">
             <figure className="px-10 pt-10">
                 <img src={picture} alt="Shoes" className="rounded-xl" />
             </figure>

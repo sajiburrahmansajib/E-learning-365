@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/UserContext';
+import './Register.css'
 
 const Register = () => {
 
@@ -50,7 +51,7 @@ const Register = () => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="hero min-h-screen bg-base-200">
+        <form onSubmit={handleSubmit} className="hero min-h-screen bg-base-200 register">
             <div className="hero-content flex-col ">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-bold">Register hare !</h1>

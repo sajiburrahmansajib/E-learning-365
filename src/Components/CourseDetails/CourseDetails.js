@@ -8,15 +8,16 @@ const CourseDetails = () => {
     const ref = React.createRef();
     const selectedCourse = useLoaderData();
     return (
-        <div>
-            <div className='bg-red-400 flex justify-center items-center mt-4 p-2'>
-                <h1 className=' text-xl font-bold  mr-4'>Your selected Course Details Show Now !!</h1>
+        <div className='enroll-container'>
+            <div className='bg-red-400 flex justify-center items-center mt-4 p-2 h-container'>
+                <h1 className=' text-xl font-bold d-header mr-4'>Your selected Course Details Show Now !!</h1>
                 <Pdf targetRef={ref} filename={`${selectedCourse.name}.pdf`}>
                     {({ toPdf }) => <button onClick={toPdf}><FcDownload className='font-bold text-4xl'></FcDownload></button>}
                 </Pdf>
             </div>
 
-            <div ref={ref} className="card w-96 bg-base-100 shadow-xl m-auto mt-10">
+
+            <div ref={ref} className="card w-96 bg-base-100 shadow-xl m-auto mt-10 mb-7 details-c">
                 <figure><img src={selectedCourse.picture} alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title">{selectedCourse.name}</h2>
@@ -29,6 +30,8 @@ const CourseDetails = () => {
                     </div>
                 </div>
             </div>
+
+
             <div className="card-actions justify-center mt-5">
                 <Link to={selectedCourse.id}><button className="btn btn-success font-bold">Enroll Now</button> </Link>
             </div>

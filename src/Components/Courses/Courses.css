@@ -30,3 +30,24 @@
     margin-top: 10px;
 
 }
+
+@media screen and (min-device-width: 320px) and (max-device-width: 819px) {
+    .course-info {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+        margin: auto;
+        margin-top: 160px;
+
+    }
+
+    .course-name a:hover {
+        color: crimson;
+        font-weight: 900;
+        font-size: large;
+    }
+
+    .course-container {
+        margin-top: 40px;
+    }
+}
